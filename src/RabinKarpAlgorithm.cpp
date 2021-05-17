@@ -27,11 +27,14 @@ namespace itis {
     std::vector<int> found_subs{};
     size_t const source_len = static_cast<int>(source.length());
     size_t const sub_len = static_cast<int>(sub.length());
-    size_t constexpr prime_q = (size_t(1) << 31) - 1; // it's (2^61 - 1)
+    if (source_len == 0 || sub_len == 0) {
+      return found_subs;
+    }
+    size_t constexpr prime_q = (size_t(1) << 31) - 1; // it's (2^31 - 1)
     size_t const x = randsizet(2, prime_q - 1);
 
     size_t sub_hash = 0;
-    size_t source_hash = 0;
+    size_t source_hash = 0; // хэш текущей части текста
     size_t x_pow = 1; // x^(sub_len - 1) % prime_q
 
     int i;
@@ -40,6 +43,9 @@ namespace itis {
     for (i = 0; i < sub_len - 1; i++) {
       x_pow = mod2pow31sub1(x_pow * x);
     }
+//  3210
+//  bcde ((old - a*x_pow)*x + e)%prime_q
+//  abcd (((0*x +a)*x +b)*x +c)*x + d
 
     // calculating hash of substring and first hash of source text
     for (i = 0; i < sub_len; i++) {
@@ -49,7 +55,7 @@ namespace itis {
 
     for (i = 0; i < source_len - sub_len + 1; i++) {
       if (sub_hash == source_hash) {
-        // hashs are equal let's check if strings are exactly the same
+        // hashes are equal let's check if strings are exactly the same
         for (j = 0; j < sub_len; j++) {
           if (sub[j] != source[i+j]) {
             break;
@@ -62,10 +68,10 @@ namespace itis {
       }
       // shift of string, recomputing of hash
       if (size_t(i) < source_len - sub_len) {
-        size_t temp1 = mod2pow31sub1(x_pow * size_t(source[i]));
-        size_t temp2 = mod2pow31sub1(source_hash + prime_q - temp1);
-        size_t temp3 = mod2pow31sub1(x*temp2);
-        source_hash = mod2pow31sub1(temp3 + size_t(source[i + sub_len]));
+        size_t temp1 = mod2pow31sub1(x_pow * size_t(source[i])); // a*x_pow
+        size_t temp2 = mod2pow31sub1(source_hash + prime_q - temp1); // old_sub - a*x_pow
+        size_t temp3 = mod2pow31sub1(x*temp2); // (old_sub - a*x_pow) * x
+        source_hash = mod2pow31sub1(temp3 + size_t(source[i + sub_len])); // (old_sub - a*x_pow) * x + new_char
       }
     }
 
