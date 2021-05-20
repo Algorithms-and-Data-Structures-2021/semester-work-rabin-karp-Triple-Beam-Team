@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
                      "Because my love is here\n"
                      "\n"
                      "Performed by maestro E.Ponasenkov";
-  std::string pattern = "Paris";
+  std::string pattern = "";
   std::vector<int> insertions = itis::search(pattern, text);
   for (int elem: insertions) {
     std::cout << elem << std::endl;

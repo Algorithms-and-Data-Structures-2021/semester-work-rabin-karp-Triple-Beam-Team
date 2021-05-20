@@ -107,7 +107,7 @@ python generate_csv_bench_dataset.py --samples 1000 <output> [args ...]
 - `<output>` - выходной файл и т.д.
 
 Тестовые данные представлены в CSV формате (см.
-[`dataset/data/dataset-example.csv`](dataset/data/dataset-example.csv)):
+[`dataset/data/dataset-example.csv`](dataset/text_data/dataset-example.csv)):
 
 ```csv
 id, full_name
@@ -119,7 +119,7 @@ id, full_name
 **Примечание**. Для удобства запуска контрольных тестов рекомендуется организовывать данные в директориях, например:
 
 ```shell
-dataset/data/
+dataset/text_data/
   add/
     01/
       100.csv
