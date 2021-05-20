@@ -1,12 +1,13 @@
 #include "RabinKarpAlgorithm.hpp"
 
 // файл с определениями
+typedef unsigned long long ull;
 
 namespace itis {
-  size_t mod2pow31sub1(size_t n) {
-    const size_t s = 31;                    // s > 0
-    const size_t d = (size_t(1) << s) - 1;  // so d is either 1, 3, 7, 15, 31, ...).
-    size_t m;                               // n % d goes here.
+  ull mod2pow31sub1(ull n) {
+    const ull s = 31;                    // s > 0
+    const ull d = (ull(1) << s) - 1;  // so d is either 1, 3, 7, 15, 31, ...).
+    ull m;                               // n % d goes here.
 
     for (m = n; n > d; n = m) {
       for (m = 0; n; n >>= s) {
@@ -19,23 +20,23 @@ namespace itis {
     return m;
   }
 
-  size_t randsizet(size_t min, size_t max) {
-      size_t result = size_t(rand() % (max-min+1) + min);
+  ull randsizet(ull min, ull max) {
+      ull result = ull(rand() % (max-min+1) + min);
       return result;
   }
   std::vector<int> search(std::string &sub, std::string &source) {
     std::vector<int> found_subs{};
-    size_t const source_len = static_cast<int>(source.length());
-    size_t const sub_len = static_cast<int>(sub.length());
+    ull const source_len = static_cast<int>(source.length());
+    ull const sub_len = static_cast<int>(sub.length());
     if (source_len == 0 || sub_len == 0) {
       return found_subs;
     }
-    size_t constexpr prime_q = (size_t(1) << 31) - 1; // it's (2^31 - 1)
-    size_t const x = randsizet(2, prime_q - 1);
+    ull constexpr prime_q = (ull(1) << 31) - 1; // it's (2^31 - 1)
+    ull const x = randsizet(2, prime_q - 1);
 
-    size_t sub_hash = 0;
-    size_t source_hash = 0; // хэш текущей части текста
-    size_t x_pow = 1; // x^(sub_len - 1) % prime_q
+    ull sub_hash = 0;
+    ull source_hash = 0; // хэш текущей части текста
+    ull x_pow = 1; // x^(sub_len - 1) % prime_q
 
     int i;
     int j;
@@ -67,11 +68,11 @@ namespace itis {
         }
       }
       // shift of string, recomputing of hash
-      if (size_t(i) < source_len - sub_len) {
-        size_t temp1 = mod2pow31sub1(x_pow * size_t(source[i])); // a*x_pow
-        size_t temp2 = mod2pow31sub1(source_hash + prime_q - temp1); // old_sub - a*x_pow
-        size_t temp3 = mod2pow31sub1(x*temp2); // (old_sub - a*x_pow) * x
-        source_hash = mod2pow31sub1(temp3 + size_t(source[i + sub_len])); // (old_sub - a*x_pow) * x + new_char
+      if (ull(i) < source_len - sub_len) {
+        ull temp1 = mod2pow31sub1(x_pow * ull(source[i])); // a*x_pow
+        ull temp2 = mod2pow31sub1(source_hash + prime_q - temp1); // old_sub - a*x_pow
+        ull temp3 = mod2pow31sub1(x*temp2); // (old_sub - a*x_pow) * x
+        source_hash = mod2pow31sub1(temp3 + ull(source[i + sub_len])); // (old_sub - a*x_pow) * x + new_char
       }
     }
 
