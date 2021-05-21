@@ -28,7 +28,7 @@ add_library(project_paths INTERFACE)
 
 target_compile_definitions(project_paths INTERFACE
         PROJECT_SOURCE_DIR="${CMAKE_SOURCE_DIR}"
-        PROJECT_DATASET_DIR="${CMAKE_SOURCE_DIR}/dataset/data")
+        PROJECT_DATASET_DIR="${CMAKE_SOURCE_DIR}/dataset/text_data")
 
 # === Библиотека со структурой данных (target) ===
 # Это самое главное, что вы должны реализовать в рамках семестрового проекта.
