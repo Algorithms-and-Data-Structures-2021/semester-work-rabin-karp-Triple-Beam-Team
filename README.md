@@ -1,4 +1,4 @@
-# Алгоритм Рабинв-Карпа by Triple Beam Team
+# Алгоритм Рабина-Карпа by Triple Beam Team
 
 [![CMake](https://github.com/Algorithms-and-Data-Structures-2021/semester-work-template/actions/workflows/cmake.yml/badge.svg)](https://github.com/Algorithms-and-Data-Structures-2021/semester-work-rabin-karp-Triple-Beam-Team/actions/workflows/cmake.yml)
 
