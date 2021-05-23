@@ -83,6 +83,7 @@ dlfjLIAIDJPOIFAJFPDikfjfhosijdffPDO:SIFJiojdfhshfuykglfidhgjjJFDSJFjGLKSHFGJKLHL
 #### Контрольные тесты (benchmarks)
 
 Для запуска контрольных тестов необходимо предварительно сгенерировать или скачать из [Google Drive](https://drive.google.com/drive/folders/1_DmDNpdUIkO5mjc236s406SC8Z-zRt8Q) готовый набор тестовых данных.
+
 **Напоминание.** Все десять папок с тестовыми данными должны находиться в папке "<Путь до репозитория>/dataset/text_data"
 
 ##### Список контрольных тестов
